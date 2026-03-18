@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>G.R.A.C.E. Journal | Reflection and Check-In Writing</title>
+  <meta
+    name="description"
+    content="Use the G.R.A.C.E. journal to reflect, process what is coming up, and keep track of your thoughts over time."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080610;
+      --bg-soft: #100b17;
+      --panel: rgba(18, 13, 24, 0.9);
+      --panel-2: rgba(26, 19, 36, 0.96);
+      --line: #2b1d3d;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --text: #f4eef8;
+      --muted: #b8aac9;
+      --muted-2: #8d7aa6;
+      --pink: #cc2f72;
+      --purple: #9b72cf;
+      --lav: #cbb6ee;
+      --purple-soft: rgba(155, 114, 207, 0.16);
+      --success: #9fe3bf;
+      --warning: #ffd666;
+      --danger: #ff9cb8;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --container: 1180px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(156, 114, 200, 0.18), transparent 0 30%),
+        linear-gradient(180deg, #0a0711 0%, #080610 100%);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    select,
+    textarea,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 6, 16, 0.74);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .main-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible,
+    .main-nav a.active {
+      background: var(--purple-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .page-wrap {
+      padding: 42px 0 68px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-soft);
+      color: var(--lav);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      font-family: "Cormorant Garamond", serif;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .lead,
+    .muted {
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: 1.06rem;
+      max-width: 760px;
+    }
+
+    .hero-actions,
+    .inline-actions,
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-actions,
+    .inline-actions,
+    .form-actions {
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(204, 47, 114, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-color: var(--line-soft);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .danger-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffb1c9;
+      border: 1px solid rgba(255, 177, 201, 0.2);
+    }
+
+    .danger-btn:hover,
+    .danger-btn:focus-visible {
+      background: rgba(255, 177, 201, 0.08);
+      outline: none;
+    }
+
+    .prompt-box {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(201, 180, 239, 0.18);
+      background: linear-gradient(135deg, rgba(204, 47, 114, 0.12), rgba(155, 114, 207, 0.12));
+      color: var(--text);
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 14px 16px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .field input,
+    .field select {
+      min-height: 52px;
+    }
+
+    .field textarea {
+      min-height: 220px;
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--muted-2);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(201, 180, 239, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .section-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .prompt-list,
+    .entry-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .prompt-item,
+    .entry-item {
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .prompt-item h3,
+    .entry-item h3 {
+      margin-bottom: 8px;
+    }
+
+    .prompt-item p,
+    .entry-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .entry-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .entry-meta {
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .entry-body {
+      white-space: pre-wrap;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .entry-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--lav);
+      border: 1px solid var(--line-soft);
+    }
+
+    .small-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .small-btn:hover,
+    .small-btn:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .small-btn.danger {
+      color: #ffb1c9;
+      border-color: rgba(255, 177, 201, 0.2);
+    }
+
+    .small-note,
+    .success-message,
+    .empty-message {
+      font-size: 0.94rem;
+    }
+
+    .small-note,
+    .empty-message {
+      color: var(--muted-2);
+    }
+
+    .success-message {
+      color: var(--success);
+      display: none;
+      margin-top: 8px;
+    }
+
+    .empty-message {
+      padding: 24px 0 4px;
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .panel,
+      .section-panel,
+      .prompt-item,
+      .entry-item {
+        padding: 20px;
+      }
+
+      .hero-actions,
+      .inline-actions,
+      .form-actions,
+      .entry-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn,
+      .small-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="G.R.A.C.E. Home">
+        <span class="brand-mark">G.R.A.C.E.</span>
+        <span class="brand-sub">Get Right And Conquer Everything</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="checkin.html">Check-In</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tools.html">Tools</a>
+        <a href="journal.html" class="active">Journal</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="container">
+      <section class="hero">
+        <div class="panel">
+          <div class="eyebrow">Reflection space</div>
+          <h1>Write what is real. Sort through what is heavy.</h1>
+          <p class="lead">
+            Use this journal to clear your mind, notice patterns, and give yourself
+            space to think without needing everything to be solved right away.
+          </p>
+
+          <div class="hero-actions">
+            <a href="checkin.html" class="btn btn-primary">Do a Check-In</a>
+            <a href="dashboard.html" class="btn btn-secondary">View Dashboard</a>
+            <a href="tools.html" class="btn btn-secondary">Open Tools</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="eyebrow">Suggested prompt</div>
+          <h3 id="suggestedPromptTitle">Start with one honest question.</h3>
+          <p class="muted" id="suggestedPromptText">
+            Complete a check-in and this page will suggest a reflection prompt based on what needs the most support.
+          </p>
+
+          <div class="prompt-box" id="suggestedPromptBox">
+            What feels heaviest right now, and what do I think that is trying to tell me?
+          </div>
+
+          <div class="inline-actions">
+            <button class="btn btn-secondary" id="useSuggestedPromptBtn" type="button">
+              Use This Prompt
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="section-panel">
+          <h2>Write a journal entry</h2>
+          <p class="muted">
+            Keep it messy if it needs to be. This is for clarity, not perfection.
+          </p>
+
+          <div class="field-grid" style="margin-top:18px;">
+            <div class="field">
+              <label for="entryTitle">Entry title</label>
+              <input
+                type="text"
+                id="entryTitle"
+                placeholder="What is this entry about?"
+              />
+            </div>
+
+            <div class="field">
+              <label for="entryCategory">Prompt category</label>
+              <select id="entryCategory">
+                <option value="general">General reflection</option>
+                <option value="emotional">Emotional / Mental</option>
+                <option value="physical">Physical</option>
+                <option value="occupational">Occupational</option>
+                <option value="financial">Financial</option>
+                <option value="social">Social</option>
+                <option value="spiritual">Spiritual</option>
+                <option value="intellectual">Intellectual</option>
+                <option value="environmental">Environmental</option>
+                <option value="custom">Custom prompt</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="entryPrompt">Prompt</label>
+              <input
+                type="text"
+                id="entryPrompt"
+                placeholder="Choose a prompt below or write your own"
+              />
+            </div>
+
+            <div class="field">
+              <label for="entryBody">Your reflection</label>
+              <textarea
+                id="entryBody"
+                placeholder="Write freely. What is coming up? What feels clear? What feels stuck? What do you need?"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" id="saveEntryBtn" type="button">Save Entry</button>
+            <button class="btn btn-secondary" id="clearFormBtn" type="button">Clear Form</button>
+          </div>
+
+          <div class="success-message" id="saveMessage">Your journal entry was saved.</div>
+          <div class="small-note" style="margin-top:10px;">
+            Entries are saved in this browser using local storage.
+          </div>
+        </div>
+
+        <div class="section-panel">
+          <h2>Prompt ideas</h2>
+          <p class="muted">
+            Pick one, then it will drop into your journal form automatically.
+          </p>
+
+          <ul class="prompt-list" id="promptList" style="margin-top:18px;"></ul>
+        </div>
+      </section>
+
+      <section class="section-panel">
+        <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start; flex-wrap:wrap; margin-bottom:18px;">
+          <div>
+            <h2 style="margin-bottom:10px;">Saved entries</h2>
+            <p class="muted" style="margin:0;">
+              Come back to notice what keeps showing up over time.
+            </p>
+          </div>
+
+          <button class="btn danger-btn" id="clearAllEntriesBtn" type="button">
+            Clear All Journal Entries
+          </button>
+        </div>
+
+        <div id="entriesEmpty" class="empty-message" style="display:none;">
+          No journal entries yet. Start with one honest reflection.
+        </div>
+
+        <ul class="entry-list" id="entryList"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const promptBank = {
+      general: [
+        "What feels heaviest right now, and what do I think that is trying to tell me?",
+        "What do I need more of right now?",
+        "What am I avoiding, and why?",
+        "If I got fully honest with myself today, what would I admit?",
+        "What would make the next 24 hours feel more manageable?"
+      ],
+      emotional: [
+        "What has been weighing on me emotionally lately?",
+        "What feeling have I been pushing away?",
+        "What kind of support would actually help me right now?",
+        "What makes me feel more grounded when I’m overwhelmed?",
+        "Where do I need more softness with myself?"
+      ],
+      physical: [
+        "What has my body been asking for lately?",
+        "Where am I running on empty physically?",
+        "What physical habit would help me feel more stable?",
+        "What has been draining my energy the most?",
+        "What does basic care look like for me right now?"
+      ],
+      occupational: [
+        "What part of my work or routine feels most off right now?",
+        "What kind of structure would help me feel more productive?",
+        "What am I capable of when I stop doubting myself?",
+        "What kind of work feels meaningful to me?",
+        "What is one task I keep avoiding that would help me move forward?"
+      ],
+      financial: [
+        "What money stress am I carrying right now?",
+        "What financial truth do I need to face without spiraling?",
+        "What is one realistic money move I can make this week?",
+        "How does financial pressure affect the rest of my life?",
+        "What would help me feel a little more in control financially?"
+      ],
+      social: [
+        "Who feels safe in my life right now?",
+        "Where do I feel unseen or unsupported?",
+        "What kind of connection do I need more of?",
+        "Which relationships give me energy and which drain it?",
+        "What boundary do I need socially right now?"
+      ],
+      spiritual: [
+        "What helps me feel grounded, connected, or at peace?",
+        "What still feels meaningful to me right now?",
+        "What has been pulling me away from myself?",
+        "Where do I need more quiet or stillness?",
+        "What helps me reconnect with purpose?"
+      ],
+      intellectual: [
+        "What have I been curious about lately?",
+        "Where have I stopped growing because I feel stuck?",
+        "What do I want to learn or understand better?",
+        "What mentally excites me right now?",
+        "Where do I want to challenge myself in a healthy way?"
+      ],
+      environmental: [
+        "How is my environment affecting my mood and focus?",
+        "What part of my space feels the heaviest?",
+        "What change in my environment would help me breathe easier?",
+        "What does a supportive environment look like for me?",
+        "What is one realistic change I can make to my space this week?"
+      ],
+      custom: [
+        "Write your own prompt here."
+      ]
+    };
+
+    function getLatestCheckin() {
+      try {
+        return JSON.parse(localStorage.getItem("graceLatestCheckin") || "null");
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function loadEntries() {
+      try {
+        return JSON.parse(localStorage.getItem("graceJournalEntries") || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveEntries(entries) {
+      localStorage.setItem("graceJournalEntries", JSON.stringify(entries));
+    }
+
+    function escapeHtml(str = "") {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getSuggestedPromptFromLatestCheckin() {
+      const latest = getLatestCheckin();
+
+      if (!latest || !latest.lowestDimension) {
+        return {
+          title: "Start with one honest question.",
+          text: "Complete a check-in and this page will suggest a reflection prompt based on what needs the most support.",
+          prompt: "What feels heaviest right now, and what do I think that is trying to tell me?"
+        };
+      }
+
+      const category = latest.lowestDimension;
+      const prompts = promptBank[category] || promptBank.general;
+      const prompt = prompts[0];
+
+      return {
+        title: `Suggested prompt based on your latest check-in`,
+        text: `${latest.lowestDimensionName || category} came up as the area needing the most support right now.`,
+        prompt
+      };
+    }
+
+    function renderSuggestedPrompt() {
+      const data = getSuggestedPromptFromLatestCheckin();
+      document.getElementById("suggestedPromptTitle").textContent = data.title;
+      document.getElementById("suggestedPromptText").textContent = data.text;
+      document.getElementById("suggestedPromptBox").textContent = data.prompt;
+    }
+
+    function renderPromptList(category) {
+      const list = document.getElementById("promptList");
+      list.innerHTML = "";
+
+      const prompts = promptBank[category] || promptBank.general;
+
+      prompts.forEach((prompt) => {
+        const item = document.createElement("li");
+        item.className = "prompt-item";
+        item.innerHTML = `
+          <h3>${escapeHtml(category === "custom" ? "Custom prompt space" : category.charAt(0).toUpperCase() + category.slice(1) + " prompt")}</h3>
+          <p>${escapeHtml(prompt)}</p>
+          <div class="inline-actions">
+            <button class="small-btn use-prompt-btn" type="button" data-prompt="${escapeHtml(prompt)}">
+              Use This Prompt
+            </button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+
+      document.querySelectorAll(".use-prompt-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const prompt = btn.getAttribute("data-prompt");
+          document.getElementById("entryPrompt").value = prompt;
+          if (!document.getElementById("entryTitle").value.trim()) {
+            document.getElementById("entryTitle").value = "Reflection Entry";
+          }
+          document.getElementById("entryBody").focus();
+        });
+      });
+    }
+
+    function renderEntries() {
+      const entries = loadEntries();
+      const entryList = document.getElementById("entryList");
+      const empty = document.getElementById("entriesEmpty");
+
+      entryList.innerHTML = "";
+
+      if (!entries.length) {
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      const sorted = [...entries].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      sorted.forEach((entry) => {
+        const item = document.createElement("li");
+        item.className = "entry-item";
+        item.innerHTML = `
+          <div class="entry-top">
+            <div>
+              <h3>${escapeHtml(entry.title)}</h3>
+              <div class="entry-meta">
+                ${escapeHtml(entry.dateLabel)} • <span class="pill">${escapeHtml(entry.categoryLabel)}</span>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Prompt:</strong> ${escapeHtml(entry.prompt)}</p>
+          <div class="entry-body">${escapeHtml(entry.body)}</div>
+
+          <div class="entry-actions">
+            <button class="small-btn load-entry-btn" type="button" data-id="${entry.id}">
+              Load Into Form
+            </button>
+            <button class="small-btn danger delete-entry-btn" type="button" data-id="${entry.id}">
+              Delete Entry
+            </button>
+          </div>
+        `;
+        entryList.appendChild(item);
+      });
+
+      document.querySelectorAll(".load-entry-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const entryId = Number(btn.dataset.id);
+          const entries = loadEntries();
+          const found = entries.find((entry) => entry.id === entryId);
+          if (!found) return;
+
+          document.getElementById("entryTitle").value = found.title;
+          document.getElementById("entryCategory").value = found.category;
+          document.getElementById("entryPrompt").value = found.prompt;
+          document.getElementById("entryBody").value = found.body;
+          renderPromptList(found.category);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      document.querySelectorAll(".delete-entry-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const entryId = Number(btn.dataset.id);
+          const entries = loadEntries().filter((entry) => entry.id !== entryId);
+          saveEntries(entries);
+          renderEntries();
+        });
+      });
+    }
+
+    function saveEntry() {
+      const title = document.getElementById("entryTitle").value.trim();
+      const category = document.getElementById("entryCategory").value;
+      const prompt = document.getElementById("entryPrompt").value.trim();
+      const body = document.getElementById("entryBody").value.trim();
+      const saveMessage = document.getElementById("saveMessage");
+
+      if (!title || !prompt || !body) {
+        alert("Please fill out the title, prompt, and journal reflection before saving.");
+        return;
+      }
+
+      const categoryLabel =
+        category === "general"
+          ? "General reflection"
+          : category === "custom"
+            ? "Custom prompt"
+            : (category.charAt(0).toUpperCase() + category.slice(1));
+
+      const entry = {
+        id: Date.now(),
+        createdAt: new Date().toISOString(),
+        dateLabel: new Date().toLocaleString(),
+        title,
+        category,
+        categoryLabel,
+        prompt,
+        body
+      };
+
+      const entries = loadEntries();
+      entries.push(entry);
+      saveEntries(entries);
+
+      saveMessage.style.display = "block";
+      setTimeout(() => {
+        saveMessage.style.display = "none";
+      }, 2200);
+
+      renderEntries();
+      clearForm(false);
+    }
+
+    function clearForm(clearPromptToo = true) {
+      document.getElementById("entryTitle").value = "";
+      if (clearPromptToo) {
+        document.getElementById("entryPrompt").value = "";
+      }
+      document.getElementById("entryBody").value = "";
+    }
+
+    function bindEvents() {
+      document.getElementById("entryCategory").addEventListener("change", (event) => {
+        const category = event.target.value;
+        renderPromptList(category);
+
+        if (category === "custom") {
+          document.getElementById("entryPrompt").value = "";
+          document.getElementById("entryPrompt").focus();
+        } else {
+          const prompts = promptBank[category] || promptBank.general;
+          document.getElementById("entryPrompt").value = prompts[0] || "";
+        }
+      });
+
+      document.getElementById("saveEntryBtn").addEventListener("click", saveEntry);
+
+      document.getElementById("clearFormBtn").addEventListener("click", () => {
+        clearForm(true);
+      });
+
+      document.getElementById("useSuggestedPromptBtn").addEventListener("click", () => {
+        const prompt = document.getElementById("suggestedPromptBox").textContent.trim();
+        document.getElementById("entryPrompt").value = prompt;
+        if (!document.getElementById("entryTitle").value.trim()) {
+          document.getElementById("entryTitle").value = "Suggested Reflection";
+        }
+        document.getElementById("entryBody").focus();
+      });
+
+      document.getElementById("clearAllEntriesBtn").addEventListener("click", () => {
+        const confirmed = window.confirm(
+          "Are you sure you want to clear all saved journal entries from this browser?"
+        );
+
+        if (!confirmed) return;
+
+        localStorage.removeItem("graceJournalEntries");
+        renderEntries();
+      });
+    }
+
+    function init() {
+      renderSuggestedPrompt();
+      renderPromptList("general");
+      renderEntries();
+      bindEvents();
+
+      const suggested = getSuggestedPromptFromLatestCheckin();
+      if (suggested?.prompt) {
+        document.getElementById("entryPrompt").value = suggested.prompt;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
