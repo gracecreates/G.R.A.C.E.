@@ -3,78 +3,746 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>G.R.A.C.E. | Figure Out Where Your Life Actually Stands</title>
   <meta
     name="description"
-    content="G.R.A.C.E. helps you check in across the 8 dimensions of wellness, get honest about what feels off, and take one clear next step."
+    content="G.R.A.C.E. helps people check in across the 8 dimensions of wellness, get honest about what feels off, and take one clear next step."
   />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="robots" content="index,follow" />
+  <meta
+    property="og:title"
+    content="G.R.A.C.E. | Figure Out Where Your Life Actually Stands"
+  />
+  <meta
+    property="og:description"
+    content="A space to reflect, check in, and move forward with more clarity, structure, and support."
+  />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080610;
+      --bg-soft: #100b17;
+      --panel: rgba(18, 13, 24, 0.88);
+      --panel-2: rgba(24, 18, 35, 0.95);
+      --line: #2b1d3d;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --text: #f4eef8;
+      --muted: #b9abc9;
+      --muted-2: #8d7aa6;
+      --pink: #cc2f72;
+      --purple: #9b72cf;
+      --lav: #c9b4ef;
+      --purple-soft: rgba(155, 114, 207, 0.16);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --container: 1180px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(156, 114, 200, 0.18), transparent 0 30%),
+        linear-gradient(180deg, #0a0711 0%, #080610 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 6, 16, 0.74);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .main-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: var(--transition);
+      font-size: 0.96rem;
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--purple-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: white !important;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(204, 47, 114, 0.18);
+    }
+
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 88px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.95fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 40px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-soft);
+      color: var(--lav);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 .accent {
+      color: var(--lav);
+    }
+
+    .hero-lead {
+      max-width: 700px;
+      font-size: 1.12rem;
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(204, 47, 114, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--line-soft);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .hero-note {
+      margin: 0;
+      color: var(--muted-2);
+      font-size: 0.95rem;
+    }
+
+    .hero-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .hero-card-top h2 {
+      margin: 0 0 8px;
+      font-size: 1.4rem;
+    }
+
+    .hero-card-top p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .snapshot {
+      display: grid;
+      gap: 12px;
+    }
+
+    .snapshot-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .snapshot-item span:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .status {
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .status.low {
+      background: rgba(255, 135, 170, 0.14);
+      color: #ffb1c9;
+    }
+
+    .status.mid {
+      background: rgba(255, 214, 102, 0.14);
+      color: #ffd666;
+    }
+
+    .status.high {
+      background: rgba(125, 211, 167, 0.14);
+      color: #a7efc5;
+    }
+
+    .hero-card-bottom {
+      padding-top: 4px;
+      border-top: 1px solid var(--line-soft);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .section-intro {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .card-grid.four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .info-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .info-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(201, 180, 239, 0.28);
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.16rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--purple-soft);
+      color: var(--lav);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .results-panel {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      margin-top: 26px;
+      align-items: start;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .preview-list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .preview-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line-soft);
+    }
+
+    .cta-band {
+      padding: 30px 0;
+    }
+
+    .cta-band-inner {
+      background: linear-gradient(135deg, rgba(204, 47, 114, 0.16), rgba(155, 114, 207, 0.18));
+      border: 1px solid rgba(201, 180, 239, 0.18);
+      border-radius: var(--radius-xl);
+      padding: 34px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-band-inner h2 {
+      margin: 0 0 10px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+    }
+
+    .cta-band-inner p {
+      max-width: 640px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+    }
+
+    .founder-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      margin-top: 26px;
+      align-items: stretch;
+    }
+
+    .founder-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--lav);
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .founder-copy p {
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+
+    .quote-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .quote-card blockquote {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .quote-card p {
+      margin: 14px 0 0;
+      color: var(--muted-2);
+    }
+
+    .mini-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .mini-link {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .mini-link:hover,
+    .mini-link:focus-visible {
+      background: rgba(255,255,255,0.08);
+      outline: none;
+    }
+
+    .site-footer {
+      padding: 34px 0 44px;
+      border-top: 1px solid var(--line-soft);
+      margin-top: 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .footer-copy p,
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .footer-copy p {
+      margin: 0 0 12px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+      justify-content: start;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--text);
+      outline: none;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .results-panel,
+      .founder-wrap,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid.four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card-grid.three {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-copy,
+      .hero-card,
+      .panel,
+      .cta-band-inner,
+      .quote-card,
+      .info-card {
+        padding: 22px;
+      }
+
+      .card-grid.four,
+      .card-grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.6rem, 13vw, 4rem);
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">G.R.A.C.E.</a>
+      <a href="index.html" class="brand" aria-label="G.R.A.C.E. Home">
+        <span class="brand-mark">G.R.A.C.E.</span>
+        <span class="brand-sub">Get Right And Conquer Everything</span>
+      </a>
 
-      <nav class="main-nav">
+      <nav class="main-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="checkin.html">Check-In</a>
         <a href="dashboard.html">Dashboard</a>
         <a href="tools.html">Tools</a>
         <a href="journal.html">Journal</a>
-        <a href="library.html">Library</a>
+        <a href="about.html">About</a>
+        <a href="checkin.html" class="nav-cta">Start Check-In</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
-      <div class="container hero-inner">
-        <p class="eyebrow">Wellness • Growth • Support</p>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Wellness • Reflection • Direction</div>
 
-        <h1>Figure out where your life actually stands.</h1>
+          <h1>
+            Figure out where your <span class="accent">life actually stands.</span>
+          </h1>
 
-        <p class="hero-text">
-          G.R.A.C.E. helps you check in across the 8 dimensions of wellness,
-          get honest about what feels off, and take one clear next step.
-        </p>
+          <p class="hero-lead">
+            G.R.A.C.E. helps you check in across the 8 dimensions of wellness,
+            get honest about what feels off, and take one clear next step.
+          </p>
 
-        <div class="hero-buttons">
-          <a href="checkin.html" class="btn btn-primary">Start My 2-Minute Check-In</a>
-          <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+          <div class="hero-actions">
+            <a href="checkin.html" class="btn btn-primary">Start My 2-Minute Check-In</a>
+            <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+          </div>
+
+          <p class="hero-note">
+            Not therapy. Not pressure. Just a real check-in with yourself.
+          </p>
         </div>
 
-        <p class="hero-note">
-          Not therapy. Not pressure. Just a real check-in with yourself.
-        </p>
+        <aside class="hero-card" aria-label="Sample wellness snapshot">
+          <div class="hero-card-top">
+            <h2>Sample Check-In Snapshot</h2>
+            <p>
+              See which areas feel strong, which feel off, and where to start first.
+            </p>
+          </div>
+
+          <div class="snapshot">
+            <div class="snapshot-item">
+              <span>Emotional / Mental</span>
+              <span class="status low">Needs attention</span>
+            </div>
+            <div class="snapshot-item">
+              <span>Physical</span>
+              <span class="status mid">Moderate</span>
+            </div>
+            <div class="snapshot-item">
+              <span>Occupational</span>
+              <span class="status high">Strong</span>
+            </div>
+            <div class="snapshot-item">
+              <span>Social</span>
+              <span class="status low">Needs attention</span>
+            </div>
+            <div class="snapshot-item">
+              <span>Financial</span>
+              <span class="status mid">Moderate</span>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom">
+            You do not need to fix everything at once. Start where the pressure is highest.
+          </div>
+        </aside>
       </div>
     </section>
 
-    <!-- WHAT FEELS TRUE RIGHT NOW -->
-    <section class="entry-points">
+    <section class="section">
       <div class="container">
-        <h2>What feels closest to where you are right now?</h2>
+        <h2 class="section-title">What feels closest to where you are right now?</h2>
         <p class="section-intro">
-          Pick one. Your check-in can adapt to where you are.
+          Pick the one that feels most true. Your check-in can meet you there.
         </p>
 
-        <div class="card-grid four-up">
-          <a href="checkin.html?mode=stuck" class="card">
+        <div class="card-grid four">
+          <a class="info-card" href="checkin.html?mode=stuck">
             <h3>I feel stuck</h3>
-            <p>Everything feels off, and I don’t know where to start.</p>
+            <p>Everything feels off, and I do not know where to start.</p>
           </a>
 
-          <a href="checkin.html?mode=direction" class="card">
+          <a class="info-card" href="checkin.html?mode=direction">
             <h3>I need direction</h3>
             <p>I want clarity on what actually matters right now.</p>
           </a>
 
-          <a href="checkin.html?mode=structure" class="card">
+          <a class="info-card" href="checkin.html?mode=structure">
             <h3>I want structure</h3>
             <p>I need routines, consistency, and something to follow.</p>
           </a>
 
-          <a href="checkin.html?mode=overwhelmed" class="card">
+          <a class="info-card" href="checkin.html?mode=overwhelmed">
             <h3>I feel overwhelmed</h3>
             <p>Too much is happening and I need to slow things down.</p>
           </a>
@@ -82,26 +750,28 @@
       </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section id="how-it-works" class="how-it-works">
+    <section class="section" id="how-it-works">
       <div class="container">
-        <h2>Simple. Honest. Useful.</h2>
+        <h2 class="section-title">Simple. Honest. Useful.</h2>
+        <p class="section-intro">
+          This is built to help you reflect without making things more complicated.
+        </p>
 
-        <div class="steps-grid three-up">
-          <div class="step-card">
-            <span class="step-number">01</span>
+        <div class="card-grid three">
+          <div class="info-card">
+            <div class="step-number">1</div>
             <h3>Check in</h3>
             <p>Answer a few quick questions about how life feels right now.</p>
           </div>
 
-          <div class="step-card">
-            <span class="step-number">02</span>
+          <div class="info-card">
+            <div class="step-number">2</div>
             <h3>See your results</h3>
             <p>Get a clear view of what feels strong and what needs attention.</p>
           </div>
 
-          <div class="step-card">
-            <span class="step-number">03</span>
+          <div class="info-card">
+            <div class="step-number">3</div>
             <h3>Take your next step</h3>
             <p>Get simple tools, prompts, and direction based on your answers.</p>
           </div>
@@ -109,120 +779,151 @@
       </div>
     </section>
 
-    <!-- RESULTS PREVIEW -->
-    <section class="results-preview">
+    <section class="section">
       <div class="container">
-        <div class="results-preview-inner">
-          <div class="results-copy">
-            <h2>You’ll see your life more clearly.</h2>
+        <div class="results-panel">
+          <div class="panel">
+            <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 2.8rem);">
+              You’ll see your life more clearly.
+            </h2>
             <p>
               The goal is not to judge yourself. The goal is to understand where
               the pressure is, what is already working, and what needs support first.
             </p>
-            <p class="results-line">
-              You don’t need to fix everything at once. Start where the pressure is highest.
+            <p>
+              A real check-in can help you stop guessing, stop spiraling, and focus
+              on one thing at a time.
             </p>
           </div>
 
-          <div class="results-card">
-            <h3>Sample Check-In Snapshot</h3>
-            <ul>
-              <li><strong>Emotional / Mental:</strong> Needs attention</li>
-              <li><strong>Physical:</strong> Moderate</li>
-              <li><strong>Occupational:</strong> Strong</li>
-              <li><strong>Social:</strong> Needs attention</li>
-              <li><strong>Financial:</strong> Moderate</li>
+          <div class="panel">
+            <h3 style="margin-top: 0;">What your results can show</h3>
+            <ul class="preview-list">
+              <li>
+                <span>Strongest area</span>
+                <strong>What you can build from</strong>
+              </li>
+              <li>
+                <span>Lowest area</span>
+                <strong>Where support is needed</strong>
+              </li>
+              <li>
+                <span>Patterns over time</span>
+                <strong>What keeps coming up</strong>
+              </li>
+              <li>
+                <span>Next step</span>
+                <strong>What to focus on first</strong>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta-band">
-      <div class="container cta-band-inner">
-        <h2>Take 2 minutes. Get real clarity.</h2>
-        <p>You can come back anytime and track your progress over time.</p>
-        <a href="checkin.html" class="btn btn-primary">Start My Check-In</a>
+      <div class="container">
+        <div class="cta-band-inner">
+          <h2>Take 2 minutes. Get real clarity.</h2>
+          <p>
+            Start with one honest check-in and come back to track your progress over time.
+          </p>
+          <a href="checkin.html" class="btn btn-primary">Start My Check-In</a>
+        </div>
       </div>
     </section>
 
-    <!-- TOOLS -->
-    <section class="featured-tools">
+    <section class="section">
       <div class="container">
-        <h2>When you’re ready, go deeper.</h2>
+        <h2 class="section-title">When you’re ready, go deeper.</h2>
+        <p class="section-intro">
+          After your check-in, use the parts of G.R.A.C.E. that fit what you need most.
+        </p>
 
-        <div class="card-grid four-up">
-          <a href="journal.html" class="card">
+        <div class="card-grid four">
+          <a class="info-card" href="journal.html">
             <h3>Journal</h3>
             <p>Reflect, clear your mind, and notice your patterns.</p>
           </a>
 
-          <a href="tools.html" class="card">
+          <a class="info-card" href="tools.html">
             <h3>Tools</h3>
             <p>Build routines, structure, and consistency in the areas that matter.</p>
           </a>
 
-          <a href="dashboard.html" class="card">
+          <a class="info-card" href="dashboard.html">
             <h3>Dashboard</h3>
             <p>See how your check-ins change over time and what needs attention.</p>
           </a>
 
-          <a href="library.html" class="card">
-            <h3>Library</h3>
-            <p>Explore wellness topics, guidance, and support resources at your own pace.</p>
+          <a class="info-card" href="about.html">
+            <h3>About G.R.A.C.E.</h3>
+            <p>Learn the story, mission, and purpose behind the platform.</p>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- WHY THIS EXISTS -->
-    <section class="founder-section">
-      <div class="container founder-inner">
-        <h2>Why this exists</h2>
+    <section class="section">
+      <div class="container">
+        <div class="founder-wrap">
+          <div class="quote-card">
+            <blockquote>
+              “You do not need to have everything figured out before you begin.”
+            </blockquote>
+            <p>G.R.A.C.E. is about starting from where you really are.</p>
+          </div>
 
-        <p>
-          G.R.A.C.E. was built for people trying to get their life back in order
-          without pretending everything is fine.
-        </p>
+          <div class="panel founder-copy">
+            <span class="founder-tag">Why this exists</span>
+            <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px;">
+              Built for people trying to get their life back in order.
+            </h2>
 
-        <p>
-          A lot of people are navigating stress, pressure, grief, burnout, life
-          transitions, and uncertainty without support that actually feels human.
-          Most tools either feel too clinical, too generic, or too disconnected
-          from real life.
-        </p>
+            <p>
+              G.R.A.C.E. was built for people who are carrying stress, grief,
+              pressure, burnout, uncertainty, or life transitions and do not want
+              another space that feels fake, clinical, or disconnected from real life.
+            </p>
 
-        <p>
-          This is different.
-        </p>
+            <p>
+              This is a place to check in honestly, slow things down, understand
+              what is going on, and move forward in a way that actually feels doable.
+            </p>
 
-        <p>
-          G.R.A.C.E. is a space to check in, reflect honestly, understand what is
-          going on, and move forward in a way that actually feels doable.
-        </p>
-      </div>
-    </section>
+            <p>
+              You do not need to be perfect. You just need a starting point.
+            </p>
 
-    <!-- FINAL CTA -->
-    <section class="final-cta">
-      <div class="container final-cta-inner">
-        <h2>Start with one honest check-in.</h2>
-        <p>
-          You do not need to have everything figured out before you begin.
-        </p>
-        <a href="checkin.html" class="btn btn-primary">Start My 2-Minute Check-In</a>
+            <div class="mini-links">
+              <a href="checkin.html" class="mini-link">Start Check-In</a>
+              <a href="about.html" class="mini-link">Read the Story</a>
+              <a href="dashboard.html" class="mini-link">View Dashboard</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>
-        G.R.A.C.E. is not a replacement for professional medical or mental health care.
-        If you are in crisis, contact a licensed professional or emergency service.
-      </p>
-      <p>&copy; 2026 G.R.A.C.E. — Get Right And Conquer Everything</p>
+    <div class="container footer-grid">
+      <div class="footer-copy">
+        <p>
+          G.R.A.C.E. is not a replacement for professional medical or mental health care.
+          If you are in crisis, contact a licensed professional or emergency service.
+        </p>
+        <p>&copy; 2026 G.R.A.C.E. — Get Right And Conquer Everything</p>
+      </div>
+
+      <div class="footer-links" aria-label="Footer links">
+        <a href="index.html">Home</a>
+        <a href="checkin.html">Check-In</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tools.html">Tools</a>
+        <a href="journal.html">Journal</a>
+        <a href="about.html">About</a>
+      </div>
     </div>
   </footer>
 </body>
