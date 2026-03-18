@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>G.R.A.C.E. Check-In | 2-Minute Wellness Reflection</title>
+  <meta
+    name="description"
+    content="Take a quick G.R.A.C.E. check-in across the 8 dimensions of wellness and get a clear next step."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080610;
+      --bg-soft: #100b17;
+      --panel: rgba(18, 13, 24, 0.9);
+      --panel-2: rgba(26, 19, 36, 0.96);
+      --line: #2b1d3d;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --text: #f4eef8;
+      --muted: #b8aac9;
+      --muted-2: #8d7aa6;
+      --pink: #cc2f72;
+      --purple: #9b72cf;
+      --lav: #cbb6ee;
+      --purple-soft: rgba(155, 114, 207, 0.16);
+      --danger: #ff9cb8;
+      --success: #9fe3bf;
+      --warning: #ffd666;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --container: 980px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(156, 114, 200, 0.18), transparent 0 30%),
+        linear-gradient(180deg, #0a0711 0%, #080610 100%);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 6, 16, 0.74);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .main-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--purple-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .page-wrap {
+      padding: 42px 0 68px;
+    }
+
+    .top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-soft);
+      color: var(--lav);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .progress-bar {
+      position: relative;
+      width: min(360px, 100%);
+      height: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      border-radius: 999px;
+      transition: width 220ms ease;
+    }
+
+    .progress-label {
+      font-size: 0.92rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .shell {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .step {
+      display: none;
+      padding: 34px;
+    }
+
+    .step.active {
+      display: block;
+      animation: fadeUp 220ms ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step h1,
+    .step h2 {
+      margin: 0 0 12px;
+      font-family: "Cormorant Garamond", serif;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .step h1 {
+      font-size: clamp(2.6rem, 5vw, 4rem);
+    }
+
+    .step h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .step-intro {
+      margin: 0 0 26px;
+      max-width: 760px;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    .mode-note {
+      margin-top: -6px;
+      margin-bottom: 24px;
+      color: var(--lav);
+      font-size: 0.98rem;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--muted-2);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(201, 180, 239, 0.38);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      min-height: 78px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 700;
+    }
+
+    .choice-btn:hover,
+    .choice-btn:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .choice-btn.selected {
+      background: linear-gradient(135deg, rgba(204, 47, 114, 0.18), rgba(155, 114, 207, 0.18));
+      border-color: rgba(201, 180, 239, 0.32);
+      color: #fff;
+    }
+
+    .dimensions-wrap {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .dimension-card {
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .dimension-card h3 {
+      margin: 0 0 6px;
+      font-size: 1.12rem;
+    }
+
+    .dimension-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .range-row {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .range-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .range-value {
+      color: var(--lav);
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #b883ff;
+      cursor: pointer;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted-2);
+      font-size: 0.82rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(204, 47, 114, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-color: var(--line-soft);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .helper {
+      margin-top: 10px;
+      color: var(--muted-2);
+      font-size: 0.94rem;
+    }
+
+    .error {
+      margin-top: 14px;
+      color: var(--danger);
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .results-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .result-card {
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .result-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+    }
+
+    .score-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .score-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line-soft);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .pill.low {
+      background: rgba(255, 135, 170, 0.14);
+      color: #ffb1c9;
+    }
+
+    .pill.mid {
+      background: rgba(255, 214, 102, 0.14);
+      color: var(--warning);
+    }
+
+    .pill.high {
+      background: rgba(125, 211, 167, 0.14);
+      color: var(--success);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .small-note {
+      margin-top: 14px;
+      color: var(--muted-2);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 820px) {
+      .choice-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .step {
+        padding: 22px;
+      }
+
+      .actions,
+      .result-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .progress-wrap {
+        justify-content: flex-start;
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="G.R.A.C.E. Home">
+        <span class="brand-mark">G.R.A.C.E.</span>
+        <span class="brand-sub">Get Right And Conquer Everything</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="checkin.html">Check-In</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tools.html">Tools</a>
+        <a href="journal.html">Journal</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="container">
+      <div class="top-meta">
+        <div class="eyebrow" id="stepEyebrow">Step 1 of 6</div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-label" id="progressLabel">17% complete</div>
+        </div>
+      </div>
+
+      <section class="shell">
+        <!-- STEP 1 -->
+        <div class="step active" data-step="1">
+          <h1>Let’s do a quick check-in.</h1>
+          <p class="step-intro">
+            This takes about 2 minutes. You’ll get a clearer view of where life feels
+            strong, where it feels off, and what to focus on next.
+          </p>
+
+          <p class="mode-note" id="modeNote" style="display:none;"></p>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="startBtn" type="button">Start</button>
+            <a class="btn btn-secondary" href="index.html">Go Back Home</a>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step" data-step="2">
+          <h2>Start with the basics.</h2>
+          <p class="step-intro">
+            Give yourself a simple starting point. Keep it honest. It does not need to be perfect.
+          </p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">What should we call you?</label>
+              <input type="text" id="name" placeholder="Your name" />
+            </div>
+
+            <div class="field">
+              <label for="goal">What do you want most right now?</label>
+              <input
+                type="text"
+                id="goal"
+                placeholder="Peace of mind, stability, direction, consistency..."
+              />
+            </div>
+
+            <div class="field">
+              <label for="hardestPart">What’s been the hardest part lately?</label>
+              <textarea
+                id="hardestPart"
+                placeholder="Write a few words or a short sentence"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="error" id="step2Error">Please fill out all three fields before continuing.</div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" data-prev="1" type="button">Back</button>
+            <button class="btn btn-primary" id="step2Next" type="button">Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" data-step="3">
+          <h2>What feels closest to where you are right now?</h2>
+          <p class="step-intro">
+            Pick the option that feels most true today.
+          </p>
+
+          <div class="choice-grid" id="modeChoices">
+            <button class="choice-btn" type="button" data-value="I feel stuck">I feel stuck</button>
+            <button class="choice-btn" type="button" data-value="I need direction">I need direction</button>
+            <button class="choice-btn" type="button" data-value="I want structure">I want structure</button>
+            <button class="choice-btn" type="button" data-value="I feel overwhelmed">I feel overwhelmed</button>
+            <button class="choice-btn" type="button" data-value="I just want to improve">I just want to improve</button>
+          </div>
+
+          <div class="error" id="step3Error">Please choose one option before continuing.</div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" data-prev="2" type="button">Back</button>
+            <button class="btn btn-primary" id="step3Next" type="button">Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step" data-step="4">
+          <h2>How does each area of your life feel right now?</h2>
+          <p class="step-intro">
+            Rate each area from 1 to 5. 1 means very low. 5 means strong.
+          </p>
+
+          <div class="dimensions-wrap" id="dimensionsWrap"></div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" data-prev="3" type="button">Back</button>
+            <button class="btn btn-primary" id="step4Next" type="button">Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step" data-step="5">
+          <h2>What needs attention first?</h2>
+          <p class="step-intro">
+            Let’s narrow it down so your next step feels doable.
+          </p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="priorityArea">Which area needs your attention the most right now?</label>
+              <select id="priorityArea">
+                <option value="">Choose one</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="block">What usually gets in the way?</label>
+              <input
+                type="text"
+                id="block"
+                placeholder="Stress, time, fear, lack of support, inconsistency..."
+              />
+            </div>
+          </div>
+
+          <div style="margin-top: 22px;">
+            <label style="display:block; font-weight:700; margin-bottom:12px;">
+              What would help you most right now?
+            </label>
+
+            <div class="choice-grid" id="supportChoices">
+              <button class="choice-btn" type="button" data-value="Clarity">Clarity</button>
+              <button class="choice-btn" type="button" data-value="Structure">Structure</button>
+              <button class="choice-btn" type="button" data-value="Motivation">Motivation</button>
+              <button class="choice-btn" type="button" data-value="Support">Support</button>
+              <button class="choice-btn" type="button" data-value="Tools">Tools</button>
+              <button class="choice-btn" type="button" data-value="Space to think">Space to think</button>
+            </div>
+          </div>
+
+          <div class="error" id="step5Error">Please choose a priority area, enter what gets in the way, and choose one support option.</div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" data-prev="4" type="button">Back</button>
+            <button class="btn btn-primary" id="step5Next" type="button">See My Results</button>
+          </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div class="step" data-step="6">
+          <h2>Here’s what your check-in is showing.</h2>
+          <p class="step-intro">
+            This is not about judging yourself. It is about seeing things more clearly.
+          </p>
+
+          <div class="results-grid">
+            <div class="result-card">
+              <h3>Summary</h3>
+              <p id="summaryText" style="margin:0; color:var(--muted);"></p>
+            </div>
+
+            <div class="result-card">
+              <h3>Your scores</h3>
+              <ul class="score-list" id="scoreList"></ul>
+            </div>
+
+            <div class="result-card">
+              <h3>Start here</h3>
+              <p id="focusText" style="margin:0; color:var(--muted);"></p>
+            </div>
+
+            <div class="result-card">
+              <h3>Try this next</h3>
+              <ul class="score-list" id="nextStepsList"></ul>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+            <a href="tools.html" class="btn btn-secondary">Try a Tool</a>
+            <a href="journal.html" class="btn btn-secondary">Do a Journal Entry</a>
+          </div>
+
+          <p class="small-note">
+            Come back tomorrow. This works best when you check in consistently and track your patterns over time.
+          </p>
+
+          <div class="actions">
+            <button class="btn btn-secondary" data-prev="5" type="button">Back</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const dimensions = [
+      {
+        key: "emotional",
+        name: "Emotional / Mental",
+        prompt: "How are you feeling internally day to day?"
+      },
+      {
+        key: "physical",
+        name: "Physical",
+        prompt: "Energy, sleep, movement, and overall health."
+      },
+      {
+        key: "occupational",
+        name: "Occupational",
+        prompt: "Work, purpose, or how you spend your time."
+      },
+      {
+        key: "financial",
+        name: "Financial",
+        prompt: "Money stability, stress, and control."
+      },
+      {
+        key: "social",
+        name: "Social",
+        prompt: "Connections, friendships, and support."
+      },
+      {
+        key: "spiritual",
+        name: "Spiritual",
+        prompt: "Sense of meaning, peace, or grounding."
+      },
+      {
+        key: "intellectual",
+        name: "Intellectual",
+        prompt: "Learning, curiosity, and growth."
+      },
+      {
+        key: "environmental",
+        name: "Environmental",
+        prompt: "Your surroundings and living situation."
+      }
+    ];
+
+    const appState = {
+      currentStep: 1,
+      mode: "",
+      supportType: "",
+      form: {
+        name: "",
+        goal: "",
+        hardestPart: "",
+        selectedMode: "",
+        scores: {},
+        notes: {},
+        priorityArea: "",
+        block: "",
+        supportType: ""
+      }
+    };
+
+    const modeMessages = {
+      stuck: "You came in through: I feel stuck. This check-in will help you find a starting point.",
+      direction: "You came in through: I need direction. This check-in will help you see what matters most right now.",
+      structure: "You came in through: I want structure. This check-in will help you find one area to organize first.",
+      overwhelmed: "You came in through: I feel overwhelmed. This check-in will help slow things down and simplify what needs attention."
+    };
+
+    const nextStepSuggestions = {
+      emotional: [
+        "Do a 5-minute reset before anything else today.",
+        "Journal prompt: What has been weighing on me lately?",
+        "Choose one person or one practice that helps you feel more grounded."
+      ],
+      physical: [
+        "Start with one basic reset: water, food, movement, or sleep.",
+        "Journal prompt: What has my body been asking for lately?",
+        "Make one small physical goal for the next 24 hours."
+      ],
+      occupational: [
+        "Choose one task that would make today feel more productive or purposeful.",
+        "Journal prompt: What kind of work or routine gives me energy?",
+        "Break your biggest task into one first action."
+      ],
+      financial: [
+        "Look at one money number honestly today, even if it is uncomfortable.",
+        "Journal prompt: What financial stress am I carrying right now?",
+        "Choose one small money action: track, pay, pause, or plan."
+      ],
+      social: [
+        "Reach out to one person you trust or miss.",
+        "Journal prompt: What kind of support do I wish I had more of?",
+        "Notice which relationships feel safe, mutual, and real."
+      ],
+      spiritual: [
+        "Take a few quiet minutes to slow down and reconnect with yourself.",
+        "Journal prompt: What has been giving me meaning lately?",
+        "Choose one grounding practice for today."
+      ],
+      intellectual: [
+        "Spend 10 minutes learning, reading, or exploring something that wakes your mind up.",
+        "Journal prompt: What have I been curious about lately?",
+        "Choose one topic or skill you want to keep building."
+      ],
+      environmental: [
+        "Make one small change to your space that helps you breathe easier.",
+        "Journal prompt: How is my environment affecting me right now?",
+        "Clear, clean, or organize one area you use every day."
+      ]
+    };
+
+    const stepEyebrow = document.getElementById("stepEyebrow");
+    const progressFill = document.getElementById("progressFill");
+    const progressLabel = document.getElementById("progressLabel");
+    const steps = Array.from(document.querySelectorAll(".step"));
+    const dimensionsWrap = document.getElementById("dimensionsWrap");
+    const priorityArea = document.getElementById("priorityArea");
+
+    function init() {
+      buildDimensionCards();
+      buildPriorityOptions();
+      prefillModeFromUrl();
+      bindEvents();
+      updateProgress();
+    }
+
+    function buildDimensionCards() {
+      dimensions.forEach((dimension) => {
+        appState.form.scores[dimension.key] = 3;
+        appState.form.notes[dimension.key] = "";
+
+        const card = document.createElement("div");
+        card.className = "dimension-card";
+        card.innerHTML = `
+          <h3>${dimension.name}</h3>
+          <p>${dimension.prompt}</p>
+
+          <div class="range-row">
+            <div class="range-head">
+              <span>Current score</span>
+              <span class="range-value" id="${dimension.key}Value">3 / 5</span>
+            </div>
+
+            <input
+              type="range"
+              min="1"
+              max="5"
+              step="1"
+              value="3"
+              id="${dimension.key}Range"
+            />
+
+            <div class="range-labels">
+              <span>1 = very low</span>
+              <span>5 = strong</span>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:12px;">
+            <label for="${dimension.key}Note">What’s affecting this most?</label>
+            <input
+              type="text"
+              id="${dimension.key}Note"
+              placeholder="Optional note"
+            />
+          </div>
+        `;
+        dimensionsWrap.appendChild(card);
+      });
+
+      dimensions.forEach((dimension) => {
+        const range = document.getElementById(`${dimension.key}Range`);
+        const value = document.getElementById(`${dimension.key}Value`);
+        const note = document.getElementById(`${dimension.key}Note`);
+
+        range.addEventListener("input", () => {
+          appState.form.scores[dimension.key] = Number(range.value);
+          value.textContent = `${range.value} / 5`;
+        });
+
+        note.addEventListener("input", () => {
+          appState.form.notes[dimension.key] = note.value.trim();
+        });
+      });
+    }
+
+    function buildPriorityOptions() {
+      dimensions.forEach((dimension) => {
+        const option = document.createElement("option");
+        option.value = dimension.key;
+        option.textContent = dimension.name;
+        priorityArea.appendChild(option);
+      });
+    }
+
+    function prefillModeFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get("mode");
+      const modeNote = document.getElementById("modeNote");
+
+      if (mode && modeMessages[mode]) {
+        appState.mode = mode;
+        modeNote.textContent = modeMessages[mode];
+        modeNote.style.display = "block";
+
+        const mappedLabel = {
+          stuck: "I feel stuck",
+          direction: "I need direction",
+          structure: "I want structure",
+          overwhelmed: "I feel overwhelmed"
+        }[mode];
+
+        if (mappedLabel) {
+          appState.form.selectedMode = mappedLabel;
+        }
+      }
+    }
+
+    function bindEvents() {
+      document.getElementById("startBtn").addEventListener("click", () => goToStep(2));
+
+      document.getElementById("step2Next").addEventListener("click", handleStep2);
+      document.getElementById("step3Next").addEventListener("click", handleStep3);
+      document.getElementById("step4Next").addEventListener("click", () => goToStep(5));
+      document.getElementById("step5Next").addEventListener("click", handleStep5);
+
+      document.querySelectorAll("[data-prev]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          goToStep(Number(btn.dataset.prev));
+        });
+      });
+
+      document.querySelectorAll("#modeChoices .choice-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#modeChoices .choice-btn").forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          appState.form.selectedMode = btn.dataset.value;
+          hideError("step3Error");
+        });
+      });
+
+      document.querySelectorAll("#supportChoices .choice-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#supportChoices .choice-btn").forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          appState.form.supportType = btn.dataset.value;
+          hideError("step5Error");
+        });
+      });
+
+      document.getElementById("name").addEventListener("input", hideStep2Error);
+      document.getElementById("goal").addEventListener("input", hideStep2Error);
+      document.getElementById("hardestPart").addEventListener("input", hideStep2Error);
+
+      document.getElementById("priorityArea").addEventListener("change", () => hideError("step5Error"));
+      document.getElementById("block").addEventListener("input", () => hideError("step5Error"));
+    }
+
+    function hideStep2Error() {
+      hideError("step2Error");
+    }
+
+    function showError(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "block";
+    }
+
+    function hideError(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "none";
+    }
+
+    function goToStep(stepNumber) {
+      appState.currentStep = stepNumber;
+
+      steps.forEach((step) => {
+        step.classList.toggle("active", Number(step.dataset.step) === stepNumber);
+      });
+
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function updateProgress() {
+      const percent = Math.round((appState.currentStep / 6) * 100);
+      progressFill.style.width = `${percent}%`;
+      progressLabel.textContent = `${percent}% complete`;
+      stepEyebrow.textContent = `Step ${appState.currentStep} of 6`;
+    }
+
+    function handleStep2() {
+      const name = document.getElementById("name").value.trim();
+      const goal = document.getElementById("goal").value.trim();
+      const hardestPart = document.getElementById("hardestPart").value.trim();
+
+      if (!name || !goal || !hardestPart) {
+        showError("step2Error");
+        return;
+      }
+
+      appState.form.name = name;
+      appState.form.goal = goal;
+      appState.form.hardestPart = hardestPart;
+      hideError("step2Error");
+      goToStep(3);
+
+      if (appState.form.selectedMode) {
+        document.querySelectorAll("#modeChoices .choice-btn").forEach((btn) => {
+          btn.classList.toggle("selected", btn.dataset.value === appState.form.selectedMode);
+        });
+      }
+    }
+
+    function handleStep3() {
+      if (!appState.form.selectedMode) {
+        showError("step3Error");
+        return;
+      }
+
+      hideError("step3Error");
+      goToStep(4);
+    }
+
+    function handleStep5() {
+      const selectedPriority = document.getElementById("priorityArea").value;
+      const block = document.getElementById("block").value.trim();
+
+      if (!selectedPriority || !block || !appState.form.supportType) {
+        showError("step5Error");
+        return;
+      }
+
+      appState.form.priorityArea = selectedPriority;
+      appState.form.block = block;
+
+      hideError("step5Error");
+      generateResults();
+      saveCheckin();
+      goToStep(6);
+    }
+
+    function getDimensionNameByKey(key) {
+      const found = dimensions.find((d) => d.key === key);
+      return found ? found.name : key;
+    }
+
+    function getStatusLabel(score) {
+      if (score <= 2) return { text: "Needs attention", className: "low" };
+      if (score === 3) return { text: "Moderate", className: "mid" };
+      return { text: "Strong", className: "high" };
+    }
+
+    function sortScoresAscending() {
+      return [...dimensions]
+        .map((dimension) => ({
+          ...dimension,
+          score: Number(appState.form.scores[dimension.key] || 0)
+        }))
+        .sort((a, b) => a.score - b.score);
+    }
+
+    function generateResults() {
+      const sorted = sortScoresAscending();
+      const lowest = sorted[0];
+      const highest = [...sorted].sort((a, b) => b.score - a.score)[0];
+
+      const summaryText = document.getElementById("summaryText");
+      const focusText = document.getElementById("focusText");
+      const scoreList = document.getElementById("scoreList");
+      const nextStepsList = document.getElementById("nextStepsList");
+
+      summaryText.innerHTML = `
+        ${appState.form.name}, it looks like you may need more support around
+        <strong>${lowest.name}</strong> right now.
+        Your strongest area looks like <strong>${highest.name}</strong>, which is something you can build from.
+      `;
+
+      focusText.innerHTML = `
+        Don’t try to fix everything at once. Focus on one area first.<br /><br />
+        Suggested first focus: <strong>${getDimensionNameByKey(appState.form.priorityArea)}</strong><br />
+        What gets in the way most: <strong>${escapeHtml(appState.form.block)}</strong><br />
+        What would help most right now: <strong>${escapeHtml(appState.form.supportType)}</strong>
+      `;
+
+      scoreList.innerHTML = "";
+      dimensions.forEach((dimension) => {
+        const score = Number(appState.form.scores[dimension.key]);
+        const status = getStatusLabel(score);
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${dimension.name}</span>
+          <span class="pill ${status.className}">${score} / 5 · ${status.text}</span>
+        `;
+        scoreList.appendChild(li);
+      });
+
+      nextStepsList.innerHTML = "";
+      const suggestions = nextStepSuggestions[lowest.key] || [
+        "Start with one small action today.",
+        "Reflect on what is making this area feel heavy.",
+        "Choose one practical next step and keep it simple."
+      ];
+
+      suggestions.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        nextStepsList.appendChild(li);
+      });
+    }
+
+    function saveCheckin() {
+      const sorted = sortScoresAscending();
+      const lowest = sorted[0];
+      const highest = [...sorted].sort((a, b) => b.score - a.score)[0];
+
+      const entry = {
+        id: Date.now(),
+        createdAt: new Date().toISOString(),
+        dateLabel: new Date().toLocaleDateString(),
+        name: appState.form.name,
+        goal: appState.form.goal,
+        hardestPart: appState.form.hardestPart,
+        selectedMode: appState.form.selectedMode,
+        priorityArea: appState.form.priorityArea,
+        block: appState.form.block,
+        supportType: appState.form.supportType,
+        scores: appState.form.scores,
+        notes: appState.form.notes,
+        lowestDimension: lowest.key,
+        highestDimension: highest.key,
+        lowestDimensionName: lowest.name,
+        highestDimensionName: highest.name
+      };
+
+      const existing = JSON.parse(localStorage.getItem("graceCheckins") || "[]");
+      existing.push(entry);
+      localStorage.setItem("graceCheckins", JSON.stringify(existing));
+      localStorage.setItem("graceLatestCheckin", JSON.stringify(entry));
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    init();
+  </script>
+</body>
+</html>
