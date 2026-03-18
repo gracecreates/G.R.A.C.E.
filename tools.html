@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>G.R.A.C.E. Dashboard | Your Wellness Patterns</title>
+  <meta
+    name="description"
+    content="View your G.R.A.C.E. check-in history, wellness patterns, strongest areas, and what needs support next."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080610;
+      --bg-soft: #100b17;
+      --panel: rgba(18, 13, 24, 0.9);
+      --panel-2: rgba(26, 19, 36, 0.96);
+      --line: #2b1d3d;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --text: #f4eef8;
+      --muted: #b8aac9;
+      --muted-2: #8d7aa6;
+      --pink: #cc2f72;
+      --purple: #9b72cf;
+      --lav: #cbb6ee;
+      --purple-soft: rgba(155, 114, 207, 0.16);
+      --danger: #ff9cb8;
+      --success: #9fe3bf;
+      --warning: #ffd666;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --container: 1180px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(156, 114, 200, 0.18), transparent 0 30%),
+        linear-gradient(180deg, #0a0711 0%, #080610 100%);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 6, 16, 0.74);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .main-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible,
+    .main-nav a.active {
+      background: var(--purple-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .page-wrap {
+      padding: 42px 0 68px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-soft);
+      color: var(--lav);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      font-family: "Cormorant Garamond", serif;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .lead,
+    .muted {
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: 1.06rem;
+      max-width: 760px;
+    }
+
+    .hero-actions,
+    .inline-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(204, 47, 114, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-color: var(--line-soft);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .stats-grid,
+    .card-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 24px;
+    }
+
+    .card-grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 24px;
+    }
+
+    .card-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 24px;
+    }
+
+    .stat-card,
+    .info-card,
+    .history-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      color: var(--muted-2);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .pill.low {
+      background: rgba(255, 135, 170, 0.14);
+      color: #ffb1c9;
+    }
+
+    .pill.mid {
+      background: rgba(255, 214, 102, 0.14);
+      color: var(--warning);
+    }
+
+    .pill.high {
+      background: rgba(125, 211, 167, 0.14);
+      color: var(--success);
+    }
+
+    .score-list,
+    .history-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .score-list li,
+    .history-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line-soft);
+    }
+
+    .history-list li {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .history-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .history-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .history-detail {
+      color: var(--muted);
+      font-size: 0.95rem;
+      width: 100%;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+
+    .empty-state h2 {
+      margin-bottom: 14px;
+    }
+
+    .averages-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .average-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 70px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .bar-track {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line-soft);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      width: 0%;
+    }
+
+    .quote {
+      color: var(--lav);
+      font-size: 1.04rem;
+    }
+
+    .danger-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffb1c9;
+      border: 1px solid rgba(255, 177, 201, 0.2);
+    }
+
+    .danger-btn:hover,
+    .danger-btn:focus-visible {
+      background: rgba(255, 177, 201, 0.08);
+      outline: none;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .card-grid.two,
+      .card-grid.three,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .panel,
+      .stat-card,
+      .info-card,
+      .history-card {
+        padding: 20px;
+      }
+
+      .hero-actions,
+      .inline-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .average-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="G.R.A.C.E. Home">
+        <span class="brand-mark">G.R.A.C.E.</span>
+        <span class="brand-sub">Get Right And Conquer Everything</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="checkin.html">Check-In</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="tools.html">Tools</a>
+        <a href="journal.html">Journal</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="container">
+      <div id="dashboardContent" style="display:none;">
+        <section class="hero">
+          <div class="panel">
+            <div class="eyebrow">Your wellness dashboard</div>
+            <h1 id="welcomeTitle">Your patterns start to make more sense here.</h1>
+            <p class="lead" id="welcomeText">
+              Look at what feels strongest, what needs more support, and what has been coming up over time.
+            </p>
+
+            <div class="hero-actions">
+              <a href="checkin.html" class="btn btn-primary">Do Another Check-In</a>
+              <a href="tools.html" class="btn btn-secondary">Open Tools</a>
+              <a href="journal.html" class="btn btn-secondary">Open Journal</a>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="eyebrow">Latest summary</div>
+            <h3 id="latestSummaryTitle">Latest check-in</h3>
+            <p class="muted" id="latestSummaryText"></p>
+            <p class="quote" id="latestSupportText"></p>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total check-ins</div>
+            <div class="stat-value" id="totalCheckins">0</div>
+            <div class="stat-note">Every entry helps you see your patterns more clearly.</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Latest lowest area</div>
+            <div class="stat-value" id="lowestAreaStat">—</div>
+            <div class="stat-note">This is the area asking for the most attention right now.</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Latest strongest area</div>
+            <div class="stat-value" id="highestAreaStat">—</div>
+            <div class="stat-note">This is something you can build from.</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Latest support type</div>
+            <div class="stat-value" id="supportTypeStat">—</div>
+            <div class="stat-note">What you said would help most right now.</div>
+          </div>
+        </section>
+
+        <section class="card-grid two">
+          <div class="info-card">
+            <h2>Latest scores</h2>
+            <ul class="score-list" id="latestScoresList"></ul>
+          </div>
+
+          <div class="info-card">
+            <h2>Average patterns</h2>
+            <p class="muted">
+              These averages update as you complete more check-ins.
+            </p>
+            <div class="averages-grid" id="averagesGrid"></div>
+          </div>
+        </section>
+
+        <section class="card-grid two">
+          <div class="info-card">
+            <h2>What you said you need</h2>
+            <ul class="score-list" id="needList"></ul>
+          </div>
+
+          <div class="info-card">
+            <h2>Quick reflection</h2>
+            <p class="muted" id="reflectionText"></p>
+
+            <div class="inline-actions">
+              <a href="journal.html" class="btn btn-secondary">Write About This</a>
+              <a href="tools.html" class="btn btn-secondary">Get a Tool</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="history-card">
+          <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start; flex-wrap:wrap; margin-bottom:18px;">
+            <div>
+              <h2 style="margin-bottom:10px;">Check-in history</h2>
+              <p class="muted" style="margin:0;">
+                Your most recent entries are listed here.
+              </p>
+            </div>
+
+            <button class="btn danger-btn" id="clearDataBtn" type="button">
+              Clear Saved Check-Ins
+            </button>
+          </div>
+
+          <ul class="history-list" id="historyList"></ul>
+        </section>
+      </div>
+
+      <div class="panel empty-state" id="emptyState" style="display:none;">
+        <div class="eyebrow">No saved data yet</div>
+        <h2>Your dashboard will show up after your first check-in.</h2>
+        <p>
+          Start with one honest reflection. Then come back here to see your patterns,
+          scores, and next steps over time.
+        </p>
+
+        <div class="inline-actions" style="justify-content:center;">
+          <a href="checkin.html" class="btn btn-primary">Start My First Check-In</a>
+          <a href="index.html" class="btn btn-secondary">Go Home</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const dimensions = [
+      { key: "emotional", name: "Emotional / Mental" },
+      { key: "physical", name: "Physical" },
+      { key: "occupational", name: "Occupational" },
+      { key: "financial", name: "Financial" },
+      { key: "social", name: "Social" },
+      { key: "spiritual", name: "Spiritual" },
+      { key: "intellectual", name: "Intellectual" },
+      { key: "environmental", name: "Environmental" }
+    ];
+
+    function loadCheckins() {
+      try {
+        return JSON.parse(localStorage.getItem("graceCheckins") || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function getLatestCheckin(checkins) {
+      if (!checkins.length) return null;
+      return [...checkins].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+    }
+
+    function getStatusLabel(score) {
+      if (score <= 2) return { text: "Needs attention", className: "low" };
+      if (score === 3) return { text: "Moderate", className: "mid" };
+      return { text: "Strong", className: "high" };
+    }
+
+    function escapeHtml(str = "") {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getDimensionName(key) {
+      const match = dimensions.find((d) => d.key === key);
+      return match ? match.name : key;
+    }
+
+    function computeAverages(checkins) {
+      const totals = {};
+      const counts = {};
+
+      dimensions.forEach((dimension) => {
+        totals[dimension.key] = 0;
+        counts[dimension.key] = 0;
+      });
+
+      checkins.forEach((entry) => {
+        dimensions.forEach((dimension) => {
+          const value = Number(entry.scores?.[dimension.key]);
+          if (!Number.isNaN(value) && value > 0) {
+            totals[dimension.key] += value;
+            counts[dimension.key] += 1;
+          }
+        });
+      });
+
+      return dimensions.map((dimension) => {
+        const avg = counts[dimension.key]
+          ? totals[dimension.key] / counts[dimension.key]
+          : 0;
+
+        return {
+          key: dimension.key,
+          name: dimension.name,
+          average: avg
+        };
+      });
+    }
+
+    function renderDashboard() {
+      const checkins = loadCheckins();
+      const latest = getLatestCheckin(checkins);
+
+      const dashboardContent = document.getElementById("dashboardContent");
+      const emptyState = document.getElementById("emptyState");
+
+      if (!checkins.length || !latest) {
+        emptyState.style.display = "block";
+        dashboardContent.style.display = "none";
+        return;
+      }
+
+      emptyState.style.display = "none";
+      dashboardContent.style.display = "block";
+
+      const welcomeTitle = document.getElementById("welcomeTitle");
+      const welcomeText = document.getElementById("welcomeText");
+      const latestSummaryTitle = document.getElementById("latestSummaryTitle");
+      const latestSummaryText = document.getElementById("latestSummaryText");
+      const latestSupportText = document.getElementById("latestSupportText");
+
+      const totalCheckins = document.getElementById("totalCheckins");
+      const lowestAreaStat = document.getElementById("lowestAreaStat");
+      const highestAreaStat = document.getElementById("highestAreaStat");
+      const supportTypeStat = document.getElementById("supportTypeStat");
+
+      const latestScoresList = document.getElementById("latestScoresList");
+      const averagesGrid = document.getElementById("averagesGrid");
+      const needList = document.getElementById("needList");
+      const reflectionText = document.getElementById("reflectionText");
+      const historyList = document.getElementById("historyList");
+
+      const userName = latest.name ? escapeHtml(latest.name) : "You";
+
+      welcomeTitle.textContent = `${userName}, your patterns start to make more sense here.`;
+      welcomeText.textContent =
+        "Use this space to notice what feels strongest, what keeps getting heavy, and what kind of support helps you move forward.";
+
+      latestSummaryTitle.textContent = `Latest check-in • ${latest.dateLabel || "Recent entry"}`;
+      latestSummaryText.innerHTML = `
+        Your lowest area was <strong>${escapeHtml(latest.lowestDimensionName)}</strong>.
+        Your strongest area was <strong>${escapeHtml(latest.highestDimensionName)}</strong>.
+      `;
+      latestSupportText.textContent = `You said what would help most right now is: ${latest.supportType || "—"}.`;
+
+      totalCheckins.textContent = checkins.length;
+      lowestAreaStat.textContent = latest.lowestDimensionName || "—";
+      highestAreaStat.textContent = latest.highestDimensionName || "—";
+      supportTypeStat.textContent = latest.supportType || "—";
+
+      latestScoresList.innerHTML = "";
+      dimensions.forEach((dimension) => {
+        const score = Number(latest.scores?.[dimension.key] || 0);
+        const status = getStatusLabel(score);
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${dimension.name}</span>
+          <span class="pill ${status.className}">${score} / 5 · ${status.text}</span>
+        `;
+        latestScoresList.appendChild(li);
+      });
+
+      averagesGrid.innerHTML = "";
+      const averages = computeAverages(checkins);
+
+      averages.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "average-row";
+
+        const averageRounded = item.average ? item.average.toFixed(1) : "0.0";
+        const widthPercent = Math.max(0, Math.min(100, (item.average / 5) * 100));
+
+        row.innerHTML = `
+          <div>${item.name}</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${widthPercent}%"></div>
+          </div>
+          <div>${averageRounded} / 5</div>
+        `;
+        averagesGrid.appendChild(row);
+      });
+
+      needList.innerHTML = `
+        <li>
+          <span>Main goal</span>
+          <span class="muted">${escapeHtml(latest.goal || "—")}</span>
+        </li>
+        <li>
+          <span>Hardest part lately</span>
+          <span class="muted">${escapeHtml(latest.hardestPart || "—")}</span>
+        </li>
+        <li>
+          <span>Priority area</span>
+          <span class="muted">${escapeHtml(getDimensionName(latest.priorityArea || ""))}</span>
+        </li>
+        <li>
+          <span>What gets in the way</span>
+          <span class="muted">${escapeHtml(latest.block || "—")}</span>
+        </li>
+        <li>
+          <span>Support needed most</span>
+          <span class="muted">${escapeHtml(latest.supportType || "—")}</span>
+        </li>
+      `;
+
+      reflectionText.textContent =
+        `${userName}, your latest check-in suggests that ${latest.lowestDimensionName} may need more care right now. At the same time, ${latest.highestDimensionName} looks like something you can lean on instead of starting from zero. You do not need to fix everything at once. Start with one area and one honest action.`;
+
+      historyList.innerHTML = "";
+      const sortedHistory = [...checkins].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      sortedHistory.forEach((entry) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <div class="history-top">
+            <strong>${escapeHtml(entry.dateLabel || "Saved entry")}</strong>
+            <span class="pill ${getStatusLabel(Number(entry.scores?.[entry.lowestDimension] || 0)).className}">
+              Lowest: ${escapeHtml(entry.lowestDimensionName || "—")}
+            </span>
+          </div>
+          <div class="history-meta">
+            Strongest area: ${escapeHtml(entry.highestDimensionName || "—")} • Support needed: ${escapeHtml(entry.supportType || "—")}
+          </div>
+          <div class="history-detail">
+            Goal: ${escapeHtml(entry.goal || "—")}<br />
+            Hardest part: ${escapeHtml(entry.hardestPart || "—")}
+          </div>
+        `;
+        historyList.appendChild(li);
+      });
+    }
+
+    document.getElementById("clearDataBtn")?.addEventListener("click", () => {
+      const confirmed = window.confirm(
+        "Are you sure you want to clear all saved G.R.A.C.E. check-ins from this browser?"
+      );
+
+      if (!confirmed) return;
+
+      localStorage.removeItem("graceCheckins");
+      localStorage.removeItem("graceLatestCheckin");
+      window.location.reload();
+    });
+
+    renderDashboard();
+  </script>
+</body>
+</html>
