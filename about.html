@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About G.R.A.C.E. | Get Right And Conquer Everything</title>
+  <meta
+    name="description"
+    content="Learn about G.R.A.C.E., why it exists, what it stands for, and how it helps people reflect, rebuild, and move forward with more clarity and support."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080610;
+      --bg-soft: #100b17;
+      --panel: rgba(18, 13, 24, 0.9);
+      --panel-2: rgba(26, 19, 36, 0.96);
+      --line: #2b1d3d;
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --text: #f4eef8;
+      --muted: #b8aac9;
+      --muted-2: #8d7aa6;
+      --pink: #cc2f72;
+      --purple: #9b72cf;
+      --lav: #cbb6ee;
+      --purple-soft: rgba(155, 114, 207, 0.16);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --container: 1180px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(156, 114, 200, 0.18), transparent 0 30%),
+        linear-gradient(180deg, #0a0711 0%, #080610 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 6, 16, 0.74);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .main-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible,
+    .main-nav a.active {
+      background: var(--purple-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .page-wrap {
+      padding: 42px 0 68px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-soft);
+      color: var(--lav);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      font-family: "Cormorant Garamond", serif;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .lead,
+    .muted {
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      max-width: 760px;
+    }
+
+    .quote-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      line-height: 1.12;
+      color: var(--text);
+    }
+
+    .quote-box p {
+      margin: 14px 0 0;
+      color: var(--muted-2);
+    }
+
+    .section-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.03));
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .grid-two,
+    .grid-three {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-two {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .info-card p,
+    .section-panel p,
+    .section-panel li {
+      color: var(--muted);
+    }
+
+    .values-list,
+    .what-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(204, 47, 114, 0.22);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-color: var(--line-soft);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .final-note {
+      color: var(--muted-2);
+      font-size: 0.95rem;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .grid-two,
+      .grid-three {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .panel,
+      .section-panel,
+      .info-card {
+        padding: 20px;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="G.R.A.C.E. Home">
+        <span class="brand-mark">G.R.A.C.E.</span>
+        <span class="brand-sub">Get Right And Conquer Everything</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="checkin.html">Check-In</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tools.html">Tools</a>
+        <a href="journal.html">Journal</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="container">
+      <section class="hero">
+        <div class="panel">
+          <div class="eyebrow">About G.R.A.C.E.</div>
+          <h1>Built for people trying to get their life back in order.</h1>
+          <p class="lead">
+            G.R.A.C.E. is a space for reflection, direction, and support. It helps people
+            slow things down, check in honestly, and move forward in a way that feels real,
+            grounded, and doable.
+          </p>
+
+          <div class="cta-row">
+            <a href="checkin.html" class="btn btn-primary">Start Check-In</a>
+            <a href="dashboard.html" class="btn btn-secondary">View Dashboard</a>
+          </div>
+        </div>
+
+        <div class="panel quote-box">
+          <blockquote>
+            “You do not need to have everything figured out before you begin.”
+          </blockquote>
+          <p>
+            G.R.A.C.E. is here to help people start from where they really are.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-panel">
+        <h2>Why G.R.A.C.E. exists</h2>
+        <p>
+          A lot of people are carrying stress, grief, burnout, pressure, life transitions,
+          or emotional weight without support that feels human enough to meet them where they are.
+        </p>
+        <p>
+          Too many spaces feel too clinical, too generic, too polished, or too disconnected
+          from real life. G.R.A.C.E. was created as something different.
+        </p>
+        <p>
+          This is a place where people can reflect honestly, understand what feels off,
+          reconnect with themselves, and take one clear next step without pretending they are fine.
+        </p>
+      </section>
+
+      <section class="grid-two">
+        <div class="section-panel">
+          <h2>Mission</h2>
+          <p>
+            G.R.A.C.E. exists to help people reflect, rebuild, and move forward with more clarity,
+            structure, support, and self-awareness through tools grounded in the 8 dimensions of wellness.
+          </p>
+        </div>
+
+        <div class="section-panel">
+          <h2>Vision</h2>
+          <p>
+            The vision is to create a trusted platform and community where people can better understand
+            their lives, strengthen their foundation, and build forward in a way that feels aligned,
+            honest, and sustainable.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-panel">
+        <h2>What G.R.A.C.E. helps people do</h2>
+        <ul class="what-list">
+          <li>Check in across the 8 dimensions of wellness</li>
+          <li>Notice what feels strongest and what needs support</li>
+          <li>Reflect through journaling and guided prompts</li>
+          <li>Build structure with simple, realistic tools</li>
+          <li>Track patterns and progress over time</li>
+          <li>Reconnect with purpose, direction, and self-awareness</li>
+        </ul>
+      </section>
+
+      <section class="section-panel">
+        <h2>The 8 dimensions of wellness</h2>
+        <div class="grid-three">
+          <div class="info-card">
+            <h3>Emotional / Mental</h3>
+            <p>How you’re feeling internally, how you process stress, and how supported your mind feels day to day.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Physical</h3>
+            <p>Your energy, rest, movement, overall health, and how your body is being cared for.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Occupational</h3>
+            <p>Your work, purpose, consistency, structure, and how you spend your time.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Financial</h3>
+            <p>Your relationship with money, stability, stress, planning, and access to resources.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Social</h3>
+            <p>Your relationships, support system, sense of connection, and community.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Spiritual</h3>
+            <p>Your sense of meaning, peace, grounding, faith, purpose, or connection to something deeper.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Intellectual</h3>
+            <p>Your growth, curiosity, learning, creativity, and how engaged your mind feels.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Environmental</h3>
+            <p>Your surroundings, daily environment, living situation, and whether your space supports your life.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="section-panel">
+          <h2>Core values</h2>
+          <ul class="values-list">
+            <li><strong>Honesty:</strong> Start from what is actually true.</li>
+            <li><strong>Humanity:</strong> Support should feel real, not robotic.</li>
+            <li><strong>Growth:</strong> Change happens step by step.</li>
+            <li><strong>Self-awareness:</strong> Reflection creates clarity.</li>
+            <li><strong>Structure:</strong> Small routines can change everything.</li>
+            <li><strong>Accessibility:</strong> Wellness tools should feel usable and understandable.</li>
+          </ul>
+        </div>
+
+        <div class="section-panel">
+          <h2>Who this is for</h2>
+          <p>
+            G.R.A.C.E. is for people who feel stuck, off balance, overwhelmed, disconnected,
+            uncertain, or ready for a reset.
+          </p>
+          <p>
+            It is for people trying to better understand their life, get honest about where they stand,
+            and move forward in a way that feels more intentional.
+          </p>
+          <p>
+            You do not need to have it all together to use this platform. You just need a place to start.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-panel">
+        <h2>Founder note</h2>
+        <p>
+          G.R.A.C.E. came from lived experience, not just ideas. It was born out of real moments of
+          trying to hold things together, trying to make sense of life, trying to rebuild, and realizing
+          how many people are doing that same work without enough support.
+        </p>
+        <p>
+          This platform was created to give people a space that feels more honest, more grounded,
+          and more useful than a lot of what is already out there.
+        </p>
+        <p>
+          The goal is not perfection. The goal is helping people pause, reflect, regroup, and keep moving.
+        </p>
+
+        <div class="cta-row">
+          <a href="checkin.html" class="btn btn-primary">Begin With a Check-In</a>
+          <a href="journal.html" class="btn btn-secondary">Open the Journal</a>
+          <a href="tools.html" class="btn btn-secondary">Explore Tools</a>
+        </div>
+
+        <div class="final-note">
+          G.R.A.C.E. is not a replacement for licensed mental health or medical care. It is a reflection
+          and support platform meant to help people better understand themselves and their next step.
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
